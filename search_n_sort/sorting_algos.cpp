@@ -53,6 +53,28 @@ bool check(
     return true;
 }
 
+
+// vector<int> merge_sort(vector<int> v) {
+
+// }
+
+
+// vector<int> quick_sort(vector<int> v) {
+
+// }
+
+
+vector<int> ins_sort(vector<int> v) {
+    for(int i = 1; i < v.size(); i++) {
+        for(int j = i; j >= 0; j--) {
+            if(v[j] < v[j-1]) swap(v[j], v[j-1]);
+        }
+    }
+
+    return v;
+}
+
+
 vector<int> sel_sort(vector<int> v) {
     int min, minIndex;
     for(int i = 0; i < v.size()-1; i++) {
@@ -73,12 +95,12 @@ vector<int> sel_sort(vector<int> v) {
 void format(
     function<vector<int>(vector<int>)> func, 
     vector<int> input, 
-    vector<int> sorted
+    vector<int> sorted,
+    string sort_type
 ) {
     bool success;
-    cout << "Number of Inputs: " << input.size() << "\n";
 
-    cout << "\tSelection Sort : ";
+    cout << "\t" << sort_type << ": ";
     auto start = chrono::high_resolution_clock::now();
     success = check(sel_sort, input, sorted);
     auto stop = chrono::high_resolution_clock::now();
@@ -95,7 +117,6 @@ void test() {
     vector<vector<int>> inputs = test_cases();
 
     vector<int> sorted;
-    bool success = false;
 
     cout << "Inputs are randomly generated between " << MIN << " and " << MAX << "\nTimes in miliseconds\n\n";
 
@@ -103,26 +124,17 @@ void test() {
         sorted = input;
         sort(sorted.begin(), sorted.end());
 
-        format(sel_sort, input, sorted);
-        format(sel_sort, input, sorted);
+        cout << "Number of Inputs: " << input.size() << "\n";
+        format(sel_sort, input, sorted, "Selection Sort");
+        format(ins_sort, input, sorted, "Insertion Sort");
+        // format(merge_sort, input, sorted, "Merge Sort");
+        // format(quick_sort, input, sorted, "Quick Sort");
 
         cout << "\n";
     }
 
 }
 
-
-// vector<int> ins_sort(vector<int> v) {
-
-// }
-
-// vector<int> merge_sort(vector<int> v) {
-
-// }
-
-// vector<int> quick_sort(vector<int> v) {
-
-// }
 
 int main() {
     test();
