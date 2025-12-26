@@ -6,7 +6,7 @@
 using namespace std;
 
 #define MIN 10
-#define MAX 1e2
+#define MAX 1e3
 
 void swap(int& a, int& b) {
     int t = a;
@@ -102,7 +102,7 @@ void format(
 
     cout << "\t" << sort_type << ": ";
     auto start = chrono::high_resolution_clock::now();
-    success = check(sel_sort, input, sorted);
+    success = check(func, input, sorted);
     auto stop = chrono::high_resolution_clock::now();
     auto dur = chrono::duration_cast<chrono::microseconds>(stop - start);
     if(success) {
